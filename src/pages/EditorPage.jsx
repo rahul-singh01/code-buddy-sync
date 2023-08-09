@@ -27,7 +27,6 @@ const EditorPage = () => {
     const navigate = useNavigate();
     const {roomId} = useParams();
     const codeRef = useRef(null);
-    const messageRef = useRef(null);
 
     const [chatdisplay , setChatDisplay] = useState(false);
 

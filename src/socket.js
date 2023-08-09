@@ -10,5 +10,5 @@ export const initSocket = async () =>{
         transports : ['websocket']
     }
     // return io(process.env.REACT_APP_SERVER_URL, options)
-    return io("https://code-buddy-sync-backendserver.vercel.app/", options)
+    return io("http://localhost:5000", options)
 }

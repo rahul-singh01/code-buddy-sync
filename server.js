@@ -1,11 +1,16 @@
 import express from 'express';
 const app = express();
 import cors from 'cors'
+import path from 'path';
 
 //Adding url encoders
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
+app.use(express.static('dist'))
+app.use((req , res , next) => {
+    res.sendFile(path.join(__dirname, 'dist' , 'index.html'))
+})
 
 import compilerApi from './routes/compilerApi.js'
 
@@ -58,9 +63,9 @@ io.on('connection', (socket)=>{
         io.to(socketId).emit(ACTIONS.ACTIONS.CODE_CHANGE , { code })
     })
 
-    socket.on(ACTIONS.ACTIONS.CHATCONNECTED , ({socketId , message}) => {
-        socket.in(socketId).emit(ACTIONS.ACTIONS.CHATCONNECTED , { message })
-    })
+    // socket.on(ACTIONS.ACTIONS.CHATCONNECTED , ({socketId , message}) => {
+    //     socket.in(socketId).emit(ACTIONS.ACTIONS.CHATCONNECTED , { message })
+    // })
 
     socket.on('disconnecting' , () => {
         const rooms = [...socket.rooms]
