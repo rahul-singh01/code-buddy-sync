@@ -1,0 +1,126 @@
+.chatboxwrapper{
+    display: flex;
+    position: absolute;
+    z-index: 1; /* Set a higher value for the chatboxwrapper to appear above other components */
+    height: calc(100vh - 70px);
+    width: 280px;
+    right: 0;
+    background-color: rgb(13, 63, 93);
+    transition: transform 2s ease-in-out; 
+}
+
+.heading{
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+}
+
+.heading > h4{
+    margin-top: -2px;
+}
+
+.heading > p{
+    margin-top: -14px;
+    font-size: 12px;
+}
+
+.navchat{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.navchat > button{
+    display: flex;
+    width : 60px;
+    height : 30px;
+    font-size: 12px;
+    justify-content: center;
+    text-align: center;
+}
+
+.sendbox{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.sendbox > input{
+    height: 30px;
+    width : 80%;
+    border-radius: 10px;
+    border:1px solid white;
+    padding : 2px;
+    font-size:16px;
+}
+.sendbox > button{
+    height: 40px;
+    border-radius: 10px;
+    border:1px solid rgb(134, 7, 145);
+    padding : 2px;
+    width:20%;
+    font-size:14px;
+    color : green
+}
+
+.chattextarea{
+    margin-top: -20px;
+    width : 280px;
+    height : 400px;
+    background-color: rgb(53, 53, 53);
+    margin-bottom: 5px;
+    overflow: scroll;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+
+}
+
+.person{
+    display: flex;
+    flex-direction: column;
+    margin : 10px;
+}
+
+.personid{
+    display: flex;
+    flex-direction: row;
+}
+
+.personid > span > p{
+    font-size: 18px;
+    border-radius: 20px;
+    background-color: brown;
+    color: azure;
+    width : 30px;
+    height: 30px;
+    text-align: center;
+    margin: 5px;
+}
+
+.personid > p{
+    font-size: 16px;
+    color:white;
+    margin: 5px
+}
+
+.textareacont{
+    width : 95%;
+    height : 40px;
+    resize: none;
+    padding-left: 10px;
+    padding-top: 5px;
+}
+
+.personnav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.personnav > p{
+    font-size: 14px;
+    text-align: center;
+    padding-right: 15px;
+    margin: 5px;
+}

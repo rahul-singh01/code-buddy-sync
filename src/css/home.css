@@ -1,0 +1,59 @@
+.homePageWrapper{
+    display: flex;
+    place-content: center;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 90px;
+    text-align: center;
+}
+
+.mainimage{
+    width : 500px;
+    height: 320px;
+    border-radius: 8px;
+}
+
+.formwrapper{
+    display: flex;
+    justify-content: space-around;
+}
+
+.imgcont{
+    margin: 10px;
+}
+
+.boxcont{
+    width : 500px;
+    height : 320px
+}
+
+.inputbar{
+    width : 90%;
+    height : 25px;
+    margin: 10px;
+    text-align: center;
+    border-color: aquamarine;
+    border-radius: 8px;
+    font-size: 18px;
+}
+
+.formbtn{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 90px;
+    margin-right: 90px;
+    margin-top: 10px;
+}
+
+.fbtn{
+    font-size: 15px;
+    background-color: aquamarine;
+    color : black;
+    border-radius: 8px;
+}
+
+.fbtn:hover{
+    background-color: rgb(183, 255, 231);
+    cursor :pointer;
+    border-color: yellow;
+}

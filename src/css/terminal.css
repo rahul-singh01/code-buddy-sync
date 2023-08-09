@@ -1,0 +1,40 @@
+.terminalwrapper{
+    background-color: #000000;
+    width : 98%;
+    height : 350px;
+    border-radius: 10px;
+    border : 1px solid white;
+    padding : 5px;
+    margin: 5px;
+}
+
+.thead{
+    text-align: center;
+    margin-top: 5px;
+}
+
+.inputfield{
+    display: flex;
+    flex-direction: row;
+    place-content: center;
+    justify-content: space-between;
+}
+
+.inputbox{
+    padding:5px;
+    margin : 10px;
+}
+
+.inputbox > textarea{
+    width : 300px;
+    resize : none;
+}
+.outputbox > textarea{
+    width : 550px;
+    resize: none;
+}
+
+.outputbox{
+    padding: 5px;
+    margin : 10px;
+}

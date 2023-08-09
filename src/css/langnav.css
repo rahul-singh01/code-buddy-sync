@@ -1,0 +1,11 @@
+.langaugenav{
+    margin-top: 2px;
+    display: flex;
+    flex-direction: row;
+}
+
+.selectbox{
+    width: 300px;
+    margin-left: 5px;
+    margin-right: 5px;
+}

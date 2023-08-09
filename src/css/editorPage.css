@@ -1,0 +1,128 @@
+.mainwrapper{
+    margin-top: 0px !important;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+    place-content: left;
+}
+
+.line1{
+    width: 90%;
+    margin-top: 0px;
+}
+
+.line2{
+    display: flex;
+    height:100vh;
+    margin-left: 250px;
+}
+
+.elogo{
+    width : 50px;
+    height: 50px;
+}
+
+.companyname{
+    display: flex;
+    flex-direction: row;
+    padding: 1px;
+}
+
+.companyname > p{
+    font-weight: bold;
+    font-family: inherit;
+    font-size: 20px;
+    text-align: center;
+    padding : 5px;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+.leftbox{
+    width : 250px;
+    height : fit-content;
+    background-color: #072e50;
+    display: flex;
+    place-content: left;
+    margin-left: 0;
+    height: 100vh;
+    flex-direction: column;
+}
+
+
+
+.clientlist{
+    display: flex;
+    flex-wrap: wrap;
+    overflow: auto;
+    overflow-y: scroll;
+    height: fit-content;
+    scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+    width: 2px;
+}
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(114, 228, 211); 
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #b30000; 
+}
+   
+
+.clientavatar{
+    border-radius: 8px;
+    border-color: blanchedalmond;
+    width : 60px;
+    height: 80px;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+}
+
+.clientavatar > span > p{
+    background-color: rgb(255, 133, 153);
+    font-size: 20px;
+    border-radius: 8px;
+    margin-bottom: -15px;
+    text-align: center;
+}
+
+.leftbottombox{
+    display: flex;
+    justify-content: center;
+    place-content: center;
+    flex-direction: column;
+    position: absolute;
+    bottom: 0;
+    width : 250px;
+}
+
+.cpybtn{
+    background-color: aquamarine;
+    border-radius: 10px;
+    width : 90%;
+    margin : 5px;
+    color : black;
+    font-size: 14px;
+}
+
+.leavebtn{
+    background-color: rgb(224, 28, 28);
+    border-radius: 10px;
+    width : 90%;
+    margin : 5px;
+    color: white;
+    font-size: 14px;
+}
+
+.editorbox{
+    width: 75%;
+    background-color: #07233b;
+}
