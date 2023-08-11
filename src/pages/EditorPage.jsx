@@ -42,6 +42,7 @@ const EditorPage = () => {
                 socketRef.current.on('connect_failed' , (err) => handleErrors(err)); 
     
                 function handleErrors(e){
+                    console.log(e)
                     toast.error("Socket Connection failed , try again later")
                     navigate("/");
                 }
