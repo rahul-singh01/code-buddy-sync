@@ -12,6 +12,7 @@ const app = express.Router()
 
 
 app.post('/:langauge' , async(req,res)=>{
+    console.log("hello")
     const langauge = req.params.langauge;
     try {
         const {code} = req.body;
@@ -74,7 +75,7 @@ app.post('/:langauge' , async(req,res)=>{
         });
     } catch (error) {
         res.json({
-            output : err
+            output : error
         });   
     }
 

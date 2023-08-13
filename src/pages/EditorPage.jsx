@@ -3,6 +3,7 @@ import "../css/editorPage.css"
 import Editor from '../components/Editor'
 import Chatbox from '../components/Chatbox'
 import Optionbox from '../components/Optionbox'
+import SaveFile from '../components/SaveFile'
 import { initSocket } from '../socket'
 import ACTIONS from '../Action'
 import { useLocation } from 'react-router-dom'
@@ -150,13 +151,15 @@ const EditorPage = () => {
 
             {
                 chatdisplay ? (
-                    <Chatbox socketRef={socketRef} username={location.state?.username} receivedisplay={chatdisplay} onDisplayChange={(change)=>{
+                    <Chatbox socketRef={socketRef} roomId={roomId} username={location.state?.username} receivedisplay={chatdisplay} onDisplayChange={(change)=>{
                         setChatDisplay(change);
                     }}/>
                 ) : (
                     <></>
                 )
             }
+
+            {/* <SaveFile/> */}
            
             
         </div>

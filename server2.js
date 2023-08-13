@@ -1,27 +1,13 @@
 import express from 'express';
 const app = express();
 import cors from 'cors'
-import path from 'path';
-import { fileURLToPath } from 'url';
 
+import expressWs from 'express-ws';
+expressWs(app);
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-//Adding url encoders
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
-
-// app.use('/' , express.static('dist'))
-// app.use((req, res, next) => {
-//     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
-// });
-
-
-import compilerApi from './routes/compilerApi.js'
-
-app.use('/compiler/' , compilerApi);
-
 
 import http from 'http'
 import {Server} from 'socket.io'
@@ -30,7 +16,6 @@ const server = http.createServer(app);
 const io = new Server(server);
 
 import ACTIONS from './src/Action.js';
-import { Socket } from 'socket.io-client';
 
 const userSocketMap = {}
 
@@ -42,6 +27,25 @@ function getAllConnectedClients(roomId){
         }
     })
 }
+
+
+// WebSocket route
+app.ws('/ws', (ws, req) => {
+    console.log('WebSocket connection opened');
+
+    // Event listener for receiving messages from clients
+    ws.on('message', (message) => {
+        console.log(`Received: ${message}`);
+        // Send the received message back to the client
+        ws.send(`Server received: ${message}`);
+    });
+
+    // Event listener for closing the connection
+    ws.on('close', () => {
+        console.log('WebSocket connection closed');
+    });
+});
+
 
 io.on('connection', (socket)=>{
     console.log('connection', socket.id);
@@ -66,24 +70,10 @@ io.on('connection', (socket)=>{
 
     })
 
-    // socket.on(ACTIONS.ACTIONS.SYNC_CODE , ({socketId , code}) => {
-    //     io.to(socketId).emit(ACTIONS.ACTIONS.CODE_CHANGE , { code })
-    // })
-
-    socket.on(ACTIONS.ACTIONS.SEND_MESSAGE , ({roomId , message }) => {
-        socket.join(roomId);
-        const clients = getAllConnectedClients(roomId);
-        
-        clients.forEach(({socketId}) => {
-            if(socketId == socket.id){
-                null;
-            }else{
-                io.to(socketId).emit(ACTIONS.ACTIONS.RECEIVE_MESSAGE , {
-                    message,
-                })
-            }   
-        })
+    socket.on(ACTIONS.ACTIONS.SYNC_CODE , ({socketId , code}) => {
+        io.to(socketId).emit(ACTIONS.ACTIONS.CODE_CHANGE , { code })
     })
+
     // socket.on(ACTIONS.ACTIONS.CHATCONNECTED , ({socketId , message}) => {
     //     socket.in(socketId).emit(ACTIONS.ACTIONS.CHATCONNECTED , { message })
     // })
@@ -104,7 +94,7 @@ io.on('connection', (socket)=>{
 
 })
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001;
 server.listen(port , ()=>{
     console.log('listening on port : ' , `http://localhost:${port}`);
 });

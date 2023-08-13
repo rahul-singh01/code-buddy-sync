@@ -5,7 +5,8 @@ const ACTIONS = {
     CODE_CHANGE : 'code-change',
     SYNC_CODE : 'sync-code',
     LEAVE : 'leave',
-    CHATCONNECTED : 'chat-connected'
+    SEND_MESSAGE : 'send-message',
+    RECEIVE_MESSAGE : 'receive-message'
 };
 
 export default {ACTIONS};

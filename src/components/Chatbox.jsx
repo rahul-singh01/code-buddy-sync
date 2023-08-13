@@ -1,6 +1,9 @@
 
 import '../css/chatbox.css'
-import { useState , React} from 'react';
+import { useState , React, useRef, useEffect} from 'react';
+import ACTIONS from '../../src/Action'
+import { initSocket } from '../socket';
+import {toast} from "react-hot-toast"
 
 function getCurrentTime() {
   const now = new Date();
@@ -15,15 +18,23 @@ function getCurrentTime() {
   return formattedTime;
 }
 
-const Person = ({message , username})=>{
+function getRandomHexColor() {
+  const letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+const Person = ({message , username , dp_color})=>{
   const currentTime = getCurrentTime()
-  console.log(message , currentTime)
   return (
       <div className="person">
         <div className="personnav">
           <div className="personid">
             <span>
-              <p>{username.toUpperCase()[0]}</p>
+              <p style={{backgroundColor : dp_color}}>{username.toUpperCase()[0]}</p>
             </span>
             <p>{username}</p>
           </div>
@@ -36,23 +47,92 @@ const Person = ({message , username})=>{
   )
 }
 
+const hex_colour = getRandomHexColor();
 
-const Chatbox = ({onDisplayChange , receivedisplay , username}) => {
+const Chatbox = ({onDisplayChange , receivedisplay , username , roomId}) => {
 
+  const chatRef = useRef(null);  
   const [message, setMessage] = useState();
-  const [inputmessage , setInputMessage] = useState([]);
+  const [inputmessage , setInputMessage] = useState([{
+    name: "CodeBuddySync",
+    time: getCurrentTime(),
+    message : "Happy Coding !",
+    dp_color : '#DA70D6'
+  }]);
+
+  useEffect(() => {
+      const initializeSocket = async () => {
+        chatRef.current = await initSocket();
+      };
+      initializeSocket(); // Initialize the socket connection
+      return () => {
+        if (chatRef.current) {
+          chatRef.current.disconnect();
+        }
+      };
+    
+  }, []);
+
+
+  useEffect(()=>{
+    if (chatRef.current) {
+      console.log('Connecting')
+      chatRef.current.on(ACTIONS.ACTIONS.RECEIVE_MESSAGE, ({message}) => {
+        console.log("received msg : " , message)
+        setInputMessage(prevMessages => [...prevMessages, message]);
+      });
+      console.log("event listen");
+    }
+  },[chatRef.current])
+
+  const handlechat = () => {
+    const msg_schema = {
+      name: username,
+      time: getCurrentTime(),
+      message,
+      dp_color : hex_colour
+    };
+
+    setInputMessage(prevMessages => [...prevMessages, msg_schema]);
+    
+    chatRef.current.emit(ACTIONS.ACTIONS.SEND_MESSAGE, {
+      roomId,
+      message: msg_schema,
+    });
+    // Emit a message event
+    
+    $("#msginput").val('');
+  };
+
 
   const handledisplay = ()=>{
       onDisplayChange(!receivedisplay);
+      console.log(inputmessage)
   }
 
-  const handlechat = ()=>{
-    console.log(message , inputmessage)
-    setInputMessage([...inputmessage , message]);
+  const handleInputEnter = (e)=>{
+    if(e.code == "Enter"){
+      handlechat();
+    }
   }
+
+  try{
+    var element = document.getElementById("chat");
+    
+    // Create a MutationObserver to watch for changes in the chat box
+    const observer = new MutationObserver(() => {
+      element.scrollTop = element.scrollHeight;
+    });
+
+    // Configure the observer to watch for childList changes (when messages are added)
+    observer.observe(element, { childList: true });
+  }catch(e){
+    null
+  }
+  
 
   return (
-    <div className="chatboxwrapper" >
+    <div className="chatboxwrapper">
       <div className="chatboxcont">
         <div className="navchat">
           <div className="heading">
@@ -62,11 +142,11 @@ const Chatbox = ({onDisplayChange , receivedisplay , username}) => {
           <button onClick={handledisplay}>Close</button>
         </div>
         
-        <div className="chattextarea">
+        <div className="chattextarea" id="chat">
           {
             inputmessage ? (
-              inputmessage.map((message , index)=>(
-                <Person key={index} message={message} username={username}/>
+              inputmessage.map((msg , index)=>(
+                <Person key={index} message={msg.message} dp_color={msg.dp_color} username={msg.name}/>
               ))
                 
             ) : (
@@ -74,25 +154,11 @@ const Chatbox = ({onDisplayChange , receivedisplay , username}) => {
             )
             
           }
-          {/* <div className="person">
-            <div className="personnav">
-              <div className="personid">
-                <span>
-                  <p>R</p>
-                </span>
-                <p>Rahul Singh</p>
-              </div>
-              <p>14:16</p>
-            </div>
-            <div className="personmsg">
-              <textarea className="textareacont" value="Hello guys i am doing well" id="" cols="30" rows="10" readOnly></textarea>
-            </div>
-          </div> */}
         </div>
 
         <div className="sendbox">
-          <input onChange={(e)=> setMessage(e.target.value)} type="text" placeholder="send message" />
-          <button onClick={handlechat}>send</button>
+          <input onChange={(e)=> setMessage(e.target.value)} id="msginput" type="text" placeholder="send message" onKeyUp={handleInputEnter} />
+          <button onClick={handlechat} >send</button>
         </div>
       </div>
     </div>

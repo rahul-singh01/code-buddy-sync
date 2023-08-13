@@ -4,3 +4,39 @@
     place-content: center;
     height: calc(100vh-20px);
 }
+
+.tab{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.tab > div{
+    display: flex;
+    flex-direction: row;
+}
+
+.tab-btn > button{
+    font-size: 12px;
+    background-color: rgb(193, 142, 80);
+    color : white;
+    margin : 5px;
+    margin-bottom: 0;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.tab-btn > button:hover{
+    cursor: pointer;
+    background-color: rgb(198, 163, 119);
+
+}
+
+.message-space > textarea{
+    border-radius: 10px;
+    padding :  5px;
+    width : 400px;
+    height : 25px;
+    font-size : 10px;
+    resize: none;
+}

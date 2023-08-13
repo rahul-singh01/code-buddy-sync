@@ -51,7 +51,7 @@
     width : 80%;
     border-radius: 10px;
     border:1px solid white;
-    padding : 2px;
+    padding : 5px;
     font-size:16px;
 }
 .sendbox > button{
@@ -67,7 +67,7 @@
 .chattextarea{
     margin-top: -20px;
     width : 280px;
-    height : 400px;
+    height : 450px;
     background-color: rgb(53, 53, 53);
     margin-bottom: 5px;
     overflow: scroll;

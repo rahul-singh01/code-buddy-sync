@@ -4,6 +4,16 @@ import { useState , memo} from 'react';
 import '../../css/langnav.css'
 import axios from 'axios'
 
+const currentUrl = window.location.href;
+// Extract parts of the URL
+const urlObject = new URL(currentUrl);
+const protocol = urlObject.protocol;
+const hostname = urlObject.hostname;
+const port = urlObject.port;
+
+
+
+
 const LangaugeNav = ({onLangChange , onThemeChange , code , onTerminalOutput}) => {
     const options = [
         { value: 'javascript', codevalue: 'javascript', label: 'JavaScript' , apiLabel : 'nodejs'},
@@ -33,10 +43,11 @@ const LangaugeNav = ({onLangChange , onThemeChange , code , onTerminalOutput}) =
 
     const runcode = async() => {
         window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
+        console.log(`http://localhost:5000/compiler/${selectedOption.apiLabel}`)
         let startTime = new Date();
         const data = await axios({
             method : 'POST',
-            url : `http://localhost:5000/compiler/${selectedOption.apiLabel}`,
+            url : `${protocol}//${hostname}:${"5000"}/compiler/${selectedOption.apiLabel}`,
             headers : {
                 'Content-Type' : 'application/x-www-form-urlencoded'
             },
@@ -44,6 +55,7 @@ const LangaugeNav = ({onLangChange , onThemeChange , code , onTerminalOutput}) =
                 code
             }
         })
+        console.log(data.data)
         let endTime = new Date();
         let timeElapsed = ((endTime - startTime)/1000).toFixed(2);
         onTerminalOutput({

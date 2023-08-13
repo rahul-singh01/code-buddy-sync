@@ -1,0 +1,41 @@
+.sfwrapper{
+    display: flex;
+    position: absolute;
+    z-index: 1; /* Set a higher value for the chatboxwrapper to appear above other components */
+    height: calc(100vh - 70px);
+    width: 280px;
+    right: 0;
+    background-color: rgb(13, 63, 93);
+    transition: transform 2s ease-in-out; 
+}
+
+.sfheading{
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+}
+
+.sfheading > h4{
+    margin-top: -2px;
+}
+
+.sfheading > p{
+    margin-top: -14px;
+    font-size: 12px;
+}
+
+.sfnavchat{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.sfnavchat > button{
+    display: flex;
+    width : 60px;
+    height : 30px;
+    font-size: 12px;
+    justify-content: center;
+    text-align: center;
+}
