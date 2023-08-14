@@ -1,0 +1,34 @@
+.memwrapper{ 
+    overflow: auto;
+    overflow-x:hidden;
+}
+
+.boxwrapper{
+    height: 450px;
+    width: 250px;
+    border-radius: 15px;
+    border: 2px solid pink;
+    background-color: rgb(59, 59, 59);
+    place-content: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.membox{
+    display: flex;
+    flex-direction: row;
+    margin: 2px;
+    width: 100%;
+    justify-content: center;
+    margin-top: 5px;
+    bottom: 0;
+}
+
+.membox > button{
+    margin-left: 5px;
+    margin-right: 5px;
+    height: 30px;
+    font-size: 13px;
+    text-align: center;
+}

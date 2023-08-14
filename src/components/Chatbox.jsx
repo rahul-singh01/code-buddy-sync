@@ -50,8 +50,10 @@ const Person = ({message , username , dp_color})=>{
 const hex_colour = getRandomHexColor();
 
 const Chatbox = ({onDisplayChange , receivedisplay , username , roomId}) => {
+  // console.log('CHATBOX');
 
-  const chatRef = useRef(null);  
+  const chatRef = useRef(null);
+  const chatRefEffect = useRef(false);
   const [message, setMessage] = useState();
   const [inputmessage , setInputMessage] = useState([{
     name: "CodeBuddySync",
@@ -62,28 +64,46 @@ const Chatbox = ({onDisplayChange , receivedisplay , username , roomId}) => {
 
   useEffect(() => {
       const initializeSocket = async () => {
-        chatRef.current = await initSocket();
+        const socket = await initSocket();
+        chatRef.current = socket;
+        console.log('lst lvl', chatRef.current);
+
+        chatRef.current.on(ACTIONS.ACTIONS.RECEIVE_MESSAGE, ({message}) => {
+          console.log('res run');
+          // console.log("received msg : " , message)
+          setInputMessage(prevMessages => [...prevMessages, message]);
+        });
+        console.log('res iniciated');
       };
       initializeSocket(); // Initialize the socket connection
-      return () => {
-        if (chatRef.current) {
-          chatRef.current.disconnect();
-        }
-      };
+      console.log('effect-abv', chatRef.current);
+
+
+    return () => {
+      console.log('effect', chatRef.current);
+      if (chatRef.current) {
+        console.log('unmounting socket');
+        chatRef.current.disconnect();
+      }
+      // chatRefEffect.current = true;
+    };
+
     
   }, []);
 
 
   useEffect(()=>{
+    console.log('de: charRef', chatRef.current);
     if (chatRef.current) {
-      console.log('Connecting')
-      chatRef.current.on(ACTIONS.ACTIONS.RECEIVE_MESSAGE, ({message}) => {
-        console.log("received msg : " , message)
-        setInputMessage(prevMessages => [...prevMessages, message]);
-      });
+      console.log('Connecting res')
+      // chatRef.current.on(ACTIONS.ACTIONS.RECEIVE_MESSAGE, ({message}) => {
+      //   console.log('res run');
+      //   // console.log("received msg : " , message)
+      //   setInputMessage(prevMessages => [...prevMessages, message]);
+      // });
       console.log("event listen");
     }
-  },[chatRef.current])
+  }, [message])
 
   const handlechat = () => {
     const msg_schema = {
@@ -95,11 +115,14 @@ const Chatbox = ({onDisplayChange , receivedisplay , username , roomId}) => {
 
     setInputMessage(prevMessages => [...prevMessages, msg_schema]);
     
+    // me
+    // console.log()
+
+    // Emit a message event
     chatRef.current.emit(ACTIONS.ACTIONS.SEND_MESSAGE, {
       roomId,
       message: msg_schema,
     });
-    // Emit a message event
     
     $("#msginput").val('');
   };

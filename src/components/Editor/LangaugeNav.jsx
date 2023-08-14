@@ -42,8 +42,9 @@ const LangaugeNav = ({onLangChange , onThemeChange , code , onTerminalOutput}) =
     };
 
     const runcode = async() => {
-        window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
-        console.log(`http://localhost:5000/compiler/${selectedOption.apiLabel}`)
+        const targetElement = document.querySelector('.terminalwrapper');
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+
         let startTime = new Date();
         const data = await axios({
             method : 'POST',
@@ -55,7 +56,6 @@ const LangaugeNav = ({onLangChange , onThemeChange , code , onTerminalOutput}) =
                 code
             }
         })
-        console.log(data.data)
         let endTime = new Date();
         let timeElapsed = ((endTime - startTime)/1000).toFixed(2);
         onTerminalOutput({

@@ -1,0 +1,96 @@
+
+
+.Signupboxwrapper{
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    margin : 10px
+}
+
+.Signupput{
+    width : 90%;
+    border-radius: 8px;
+    border: 1px solid grey;
+    height : 30px;
+    margin : 5px;
+    padding : 5px
+}
+
+.log-btn{
+    font-size: 16px;
+    padding: 5px;
+    width : 50%;
+    display : flex;
+    justify-content: center;
+    border : 1px solid skyblue
+}
+
+.or-text{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 18px;
+    color: rosybrown
+}
+
+.autoauth{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.googleauth{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width : 200px;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(15, 145, 15);
+    height : 40px;
+    border-radius: 10px;
+}
+.githubauth{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width : 200px;
+    background-color: rgb(12, 12, 12);
+    border: 2px solid rgb(15, 63, 145);
+    height : 40px;
+    border-radius: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.googleauth > img{
+    width: 35px;
+    height: 35px;
+    border-radius: 10px;
+}
+
+.googleauth > p{
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
+    margin-right: 20px;
+}
+
+.githubauth > img{
+    width: 35px;
+    height: 35px;
+    border-radius: 10px;
+    background-color: aliceblue;
+    margin : 3px;
+    border-radius: 20px;
+}
+
+.githubauth > p{
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    font-weight: bold;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
+    margin-right: 20px;
+}

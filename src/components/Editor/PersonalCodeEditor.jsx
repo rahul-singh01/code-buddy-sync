@@ -24,29 +24,52 @@ import 'codemirror/theme/solarized.css';
 
 
 
-// import ACTIONS from "../../../src/Action'
+import ACTIONS from "../../../src/Action"
 
-const PersonalCodeEditor = () => {
+
+
+const PersonalCodeEditor = ({editorLang ,theme}) => {
     const editorRef = useRef(null);
-  
-    useEffect(() => {
-      // Initialize CodeMirror instance when the component mounts
-      const codeMirrorInstance = CodeMirror.fromTextArea(editorRef.current, {
-        mode: 'javascript',
-        theme: 'dracula',
-        autoCloseTags: true,
-        autoCloseBrackets: true,
-        matchBrackets: true,
-        lineNumbers: true,
-      });
-  
-      // Clean up CodeMirror instance when the component unmounts
-      return () => {
-        codeMirrorInstance.toTextArea(); // Detach CodeMirror instance from the textarea
-      };
-    }, []); // You might want to add dependencies if they change
-  
-    return <textarea ref={editorRef} id="personalEditor"></textarea>;
-  };
-  
-  export default PersonalCodeEditor;
+    useEffect(()=>{
+        async function init(){
+            editorRef.current = Codemirror.fromTextArea(
+                document.getElementById("personalEditor"),{
+                    mode : editorLang,
+                    theme : theme,
+                    autoCloseTags : true,
+                    autoCloseBrackets : true,
+                    matchBrackets : true,
+                    lineNumbers : true,
+                }
+            );
+
+            editorRef.current.on('change' , (instance , changes)=>{
+                const { origin } = changes;
+                const code = instance.getValue();
+                // onCodeChange(code);
+                // ontrackcode(code);
+                // if(origin !== 'setValue'){
+                //     socketRef.current.emit(ACTIONS.ACTIONS.CODE_CHANGE ,{
+                //         roomId,
+                //         code,
+                //     }) 
+                // }
+                
+            })
+        }
+        init();
+
+        return () => {
+            if (editorRef.current) {
+                editorRef.current.toTextArea(); // Dispose of the CodeMirror instance
+            }
+        };
+
+    },[editorLang,theme]);
+
+    return <textarea className='personalEditor' id="personalEditor"></textarea>
+
+}
+
+export default PersonalCodeEditor;
+// export default CodeEditor;

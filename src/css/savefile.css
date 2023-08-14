@@ -39,3 +39,44 @@
     justify-content: center;
     text-align: center;
 }
+
+.boxarea{
+    margin-top: -20px;
+    width : 280px;
+    min-height: calc(100vh - 60px);
+    background-color: rgb(53, 53, 53);
+    margin-bottom: 5px;
+    overflow: scroll;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    display: flex;
+    justify-content: center;
+    box-sizing: content-box;
+
+}
+
+.accountimg{
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.accountimg:hover{
+    border: 1px solid pink;
+}
+
+.logout{
+    display: flex;
+    position: absolute;
+    width: 45%;
+    background-color: rgb(47, 50, 49);
+    height: 60px;
+    justify-content: center;
+    margin-top: -10px;
+}
+
+.logout > button{
+    margin-top: 10px;
+    height : 40px
+}

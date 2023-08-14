@@ -6,7 +6,6 @@
     padding-top: 5px;
 }
 
-#personalEditor{
+.personalEditor{
     position: absolute;
-    z-index: 11;
 }

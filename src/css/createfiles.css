@@ -1,0 +1,86 @@
+.createfilewrapper{
+    display: flex;
+    flex-direction: column;
+}
+
+.searchbox{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top : 5px
+}
+
+.searchbox > input{
+    border-radius: 8px;
+    width : 200px;
+    height : 30px;
+    border : 1px solid white;
+    margin-right: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.searchbox > span{
+    border-radius: 8px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid grey;
+    align-items: center;
+}
+
+.filesconsole{
+    width : 100%;
+    min-height : calc(100vh - 110px);
+    background-color: rgb(41, 41, 41);
+    margin-top: 8px;
+    border-radius: 8px;
+}
+
+.filesconsole > h4{
+    margin-top: 0;
+    padding: 5px;
+    font-size: 12px;
+    border-bottom: 1px solid white;
+}
+
+.createitem{
+    background-color: green;
+    border-radius: 100px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-right: 10px;
+    margin-bottom: -50px;
+    cursor: pointer;
+}
+
+.createitem:hover{
+    background-color: rgb(149, 189, 149);
+}
+
+.createmenu{
+    background-color: rgb(14, 13, 13);
+    width : 95%;
+    height : 300px;
+    position: absolute;
+    bottom: 0;
+    border-radius : 10px 0px 0px 10px;
+    transition: 2s ease-in-out;
+}
+
+.createitem{
+    transform: rotate();
+}
+
+.selectboxfile{
+    width: 100px;
+    height: 30px;
+    font-size: 15px;
+}
+

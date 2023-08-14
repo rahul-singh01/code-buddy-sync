@@ -36,7 +36,7 @@ const EditorPage = () => {
     const [clients , setClients ] = useState([])
 
     useEffect(()=>{
-        if(run.current === true){
+        // if(run.current === true){
             const init = async ()=>{
                 socketRef.current = await initSocket();
                 socketRef.current.on('connect_error' , (err) => handleErrors(err));
@@ -86,10 +86,10 @@ const EditorPage = () => {
                 socketRef.current.off(ACTIONS.ACTIONS.DISCONNECTED);
             }
 
-        }
-        return () => { // when component is unmounted
-            run.current = true;
-        }
+        // }
+        // return () => { // when component is unmounted
+        //     run.current = true;
+        // }
         
     },[])
     
@@ -159,7 +159,7 @@ const EditorPage = () => {
                 )
             }
 
-            {/* <SaveFile/> */}
+            <SaveFile/>
            
             
         </div>

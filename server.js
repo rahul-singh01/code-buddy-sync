@@ -4,7 +4,6 @@ import cors from 'cors'
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 //Adding url encoders
@@ -17,10 +16,14 @@ app.use(cors())
 //     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 // });
 
-
 import compilerApi from './routes/compilerApi.js'
+import auth from './routes/Auth.js'
+
+import db from './config/database.js'
+db();
 
 app.use('/compiler/' , compilerApi);
+app.use('/api/v1/' , auth);
 
 
 import http from 'http'
@@ -50,6 +53,8 @@ io.on('connection', (socket)=>{
         userSocketMap[socket.id] = username;
         socket.join(roomId);
         const clients = getAllConnectedClients(roomId);
+
+        console.log('on conn', clients);
         
         clients.forEach(({socketId}) => {
             io.to(socketId).emit(ACTIONS.ACTIONS.JOINED , {
@@ -71,13 +76,17 @@ io.on('connection', (socket)=>{
     // })
 
     socket.on(ACTIONS.ACTIONS.SEND_MESSAGE , ({roomId , message }) => {
+        console.log('Send run');
+
         socket.join(roomId);
         const clients = getAllConnectedClients(roomId);
-        
+
+        console.log(clients);
         clients.forEach(({socketId}) => {
             if(socketId == socket.id){
                 null;
             }else{
+                console.log('emit from server');
                 io.to(socketId).emit(ACTIONS.ACTIONS.RECEIVE_MESSAGE , {
                     message,
                 })

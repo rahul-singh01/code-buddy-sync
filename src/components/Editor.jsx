@@ -66,6 +66,11 @@ const Editor = ({socketRef , roomId , onCodeChange}) => {
 
         </div>
       </div>
+
+      {/* <CodeEditor socketRef={socketRef} roomId={roomId} onCodeChange={onCodeChange} editorLang={lang} theme={theme} ontrackcode={(trackcode)=>{
+            setCode(trackcode);
+        }}/>
+      <PersonalCodeEditor editorLang={lang} theme={theme}/> */}
       
       {
         workspace === "collaborative" ? (
@@ -73,7 +78,7 @@ const Editor = ({socketRef , roomId , onCodeChange}) => {
             setCode(trackcode);
           }}/>
         ) : (
-          <PersonalCodeEditor/>
+          <PersonalCodeEditor editorLang={lang} theme={theme}/>
         )
       }
       
