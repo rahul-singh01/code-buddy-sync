@@ -30,6 +30,7 @@ const EditorPage = () => {
     const codeRef = useRef(null);
 
     const [chatdisplay , setChatDisplay] = useState(false);
+    const [myfiledisplay , setmyFileDisplay] = useState("false");
 
     const run = useRef(false)
 
@@ -147,7 +148,12 @@ const EditorPage = () => {
             
             <Optionbox chatdisplay={chatdisplay} onReceiveDisplay={(receivedisplay)=>{
                 setChatDisplay(receivedisplay);
-            }}/>
+            }}
+            handleMyFile={(e)=>{
+                e.target.setAttribute("value" , myfiledisplay)
+                e.target.getAttribute("value") == "false" ? setmyFileDisplay("true") : setmyFileDisplay("false")
+            }}
+            />
 
             {
                 chatdisplay ? (
@@ -159,7 +165,7 @@ const EditorPage = () => {
                 )
             }
 
-            <SaveFile/>
+            <SaveFile onDisplay={myfiledisplay}/>
            
             
         </div>

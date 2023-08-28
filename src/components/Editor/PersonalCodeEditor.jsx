@@ -28,7 +28,7 @@ import ACTIONS from "../../../src/Action"
 
 
 
-const PersonalCodeEditor = ({editorLang ,theme}) => {
+const PersonalCodeEditor = ({editorLang ,theme , getEditorRef2}) => {
     const editorRef = useRef(null);
     useEffect(()=>{
         async function init(){
@@ -43,9 +43,15 @@ const PersonalCodeEditor = ({editorLang ,theme}) => {
                 }
             );
 
+            getEditorRef2(editorRef);
+            editorRef.current.getWrapperElement().style.display = "none";
+
             editorRef.current.on('change' , (instance , changes)=>{
                 const { origin } = changes;
                 const code = instance.getValue();
+
+                // console.log(code);
+
                 // onCodeChange(code);
                 // ontrackcode(code);
                 // if(origin !== 'setValue'){

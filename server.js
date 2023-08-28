@@ -33,7 +33,6 @@ const server = http.createServer(app);
 const io = new Server(server);
 
 import ACTIONS from './src/Action.js';
-import { Socket } from 'socket.io-client';
 
 const userSocketMap = {}
 
@@ -76,9 +75,6 @@ io.on('connection', (socket)=>{
     // })
 
     socket.on(ACTIONS.ACTIONS.SEND_MESSAGE , ({roomId , message }) => {
-        console.log('Send run');
-
-        socket.join(roomId);
         const clients = getAllConnectedClients(roomId);
 
         console.log(clients);
@@ -86,7 +82,6 @@ io.on('connection', (socket)=>{
             if(socketId == socket.id){
                 null;
             }else{
-                console.log('emit from server');
                 io.to(socketId).emit(ACTIONS.ACTIONS.RECEIVE_MESSAGE , {
                     message,
                 })

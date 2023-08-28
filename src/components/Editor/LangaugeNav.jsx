@@ -15,11 +15,17 @@ const port = urlObject.port;
 
 
 const LangaugeNav = ({onLangChange , onThemeChange , code , onTerminalOutput}) => {
+    // const options = [
+    //     { value: 'javascript', codevalue: 'javascript', label: 'JavaScript' , apiLabel : 'nodejs'},
+    //     { value: 'cpp', codevalue: 'text/x-csrc' , label: 'C++' , apiLabel : 'cpp'},
+    //     { value: 'c', codevalue: 'text/x-csrc', label: 'C'  , apiLabel : 'c'},
+    //     { value: 'python', codevalue: 'python', label: 'Python' , apiLabel: 'python3' }
+    // ];
     const options = [
         { value: 'javascript', codevalue: 'javascript', label: 'JavaScript' , apiLabel : 'nodejs'},
-        { value: 'cpp', codevalue: 'text/x-csrc' , label: 'C++' , apiLabel : 'cpp'},
+        { value: 'cpp', codevalue: 'text/x-csrc' , label: 'C++' , apiLabel : 'c_cpp'},
         { value: 'c', codevalue: 'text/x-csrc', label: 'C'  , apiLabel : 'c'},
-        { value: 'python', codevalue: 'python', label: 'Python' , apiLabel: 'python3' }
+        { value: 'python', codevalue: 'python', label: 'Python' , apiLabel: 'python' }
     ];
     const theme_options = [
         { value: 'dracula', label: 'Dracula' },
@@ -48,7 +54,8 @@ const LangaugeNav = ({onLangChange , onThemeChange , code , onTerminalOutput}) =
         let startTime = new Date();
         const data = await axios({
             method : 'POST',
-            url : `${protocol}//${hostname}:${"5000"}/compiler/${selectedOption.apiLabel}`,
+            // url : `${protocol}//${hostname}:${"5000"}/compiler/${selectedOption.apiLabel}`,
+            url : `http://localhost:5000/compiler/${selectedOption.apiLabel}`,
             headers : {
                 'Content-Type' : 'application/x-www-form-urlencoded'
             },

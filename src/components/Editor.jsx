@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../css/editor.css'
 import LangaugeNav from './Editor/LangaugeNav'
 import CodeEditor from './Editor/CodeEditor'
@@ -12,7 +12,11 @@ const Editor = ({socketRef , roomId , onCodeChange}) => {
   const [theme , settheme] = useState("dracula");
   const [code, setCode] = useState(null);
   const [output, setOutput] = useState("");
-  const [workspace , setWorkspace] = useState("collaborative");
+  const [workspace , setWorkspace] = useState();
+  const [editorRef1 , SetEditorRef1] = useState(null);
+  const [editorRef2 , SetEditorRef2] = useState(null);
+
+  const [msgspace , setMsgSpace] = useState("You are in Collaborative Workspace Your Code Changes will appear to joined cients");
 
 
 
@@ -39,6 +43,19 @@ const Editor = ({socketRef , roomId , onCodeChange}) => {
     }
   }
 
+  useEffect(()=>{
+    if(workspace == "personal"){
+      editorRef1.current.getWrapperElement().style.display = "none";
+      editorRef2.current.getWrapperElement().style.display = "block";
+      setMsgSpace("You are in Personal Workspace , Code Changes will not appear to others.")
+    }
+    if(workspace == "collaborative"){
+      editorRef2.current.getWrapperElement().style.display = "none";
+      editorRef1.current.getWrapperElement().style.display = "block";
+      setMsgSpace("You are in Collaborative Workspace Your Code Changes will appear to joined cients")
+    }
+  },[workspace])
+
   return (
     <div className="editorwrapper">
 
@@ -57,30 +74,32 @@ const Editor = ({socketRef , roomId , onCodeChange}) => {
           <div className='tab-btn'>
             <button onClick={handleTerminalEvent} value="collaborative">+ Collaborative WorkSpace</button>
             <button onClick={handleTerminalEvent} value="personal">+ Personal WorkSpace</button>
+            <button onClick={handleTerminalEvent} value="chatgpt">+ ChatGPT WorkSpace</button>
           </div>
           
 
           <div className="message-space">
-            <textarea value="You are in Collaborative Workspace Your Code Changes will appear to joined cients" id="" cols="30" rows="10" readOnly></textarea>
+            <textarea value={msgspace} id="" cols="30" rows="10" readOnly></textarea>
           </div>
 
         </div>
       </div>
 
-      {/* <CodeEditor socketRef={socketRef} roomId={roomId} onCodeChange={onCodeChange} editorLang={lang} theme={theme} ontrackcode={(trackcode)=>{
+      <CodeEditor socketRef={socketRef} roomId={roomId} onCodeChange={onCodeChange} editorLang={lang} theme={theme} ontrackcode={(trackcode)=>{
             setCode(trackcode);
-        }}/>
-      <PersonalCodeEditor editorLang={lang} theme={theme}/> */}
-      
-      {
-        workspace === "collaborative" ? (
-          <CodeEditor socketRef={socketRef} roomId={roomId} onCodeChange={onCodeChange} editorLang={lang} theme={theme} ontrackcode={(trackcode)=>{
-            setCode(trackcode);
-          }}/>
-        ) : (
-          <PersonalCodeEditor editorLang={lang} theme={theme}/>
-        )
-      }
+        }}
+
+        getEditorRef={(editor1)=>{
+          SetEditorRef1(editor1);
+        }}  
+        
+        />
+      <PersonalCodeEditor editorLang={lang} theme={theme} 
+
+      getEditorRef2={(editor2)=>{
+        SetEditorRef2(editor2);
+      }}
+      />
       
       <Terminal output={output}/>
     </div>

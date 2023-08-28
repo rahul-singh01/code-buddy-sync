@@ -1,5 +1,5 @@
 .sfwrapper{
-    display: flex;
+    display: none;
     position: absolute;
     z-index: 1; /* Set a higher value for the chatboxwrapper to appear above other components */
     height: calc(100vh - 70px);
@@ -22,6 +22,11 @@
 .sfheading > p{
     margin-top: -14px;
     font-size: 12px;
+}
+
+.sfcont{
+    overflow:hidden;
+    height: 100vh;
 }
 
 .sfnavchat{

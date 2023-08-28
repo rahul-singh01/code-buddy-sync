@@ -1,9 +1,8 @@
 import React from 'react'
 import "../css/optionbox.css"
 
-const Optionbox = ({chatdisplay , onReceiveDisplay}) => {
+const Optionbox = ({chatdisplay , onReceiveDisplay , handleMyFile}) => {
 
-    console.log(chatdisplay);
     const handledisplay = ()=>{
         onReceiveDisplay(!chatdisplay);
     }
@@ -12,7 +11,8 @@ const Optionbox = ({chatdisplay , onReceiveDisplay}) => {
         <div className="optionboxwrapper">
             <div className="btncont">
                 <button onClick={handledisplay} className='btn'>Chat</button>
-                <button className='btn'>Save</button>
+                <button onClick={handleMyFile} value="false" className='btn'>MyFile</button>
+                <button>Save File</button>
             </div>
         </div>
     )

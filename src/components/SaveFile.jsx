@@ -5,10 +5,11 @@ import jwt_decode from 'jwt-decode'
 import { toast } from 'react-hot-toast'
 import CreateFiles from './savefile/CreateFiles'
 
-const SaveFile = () => {
+const SaveFile = ({onDisplay}) => {
   const [authdata , setAuthData] = useState({});
   const localtoken = localStorage.getItem('token')
   const [logoutdisplay , setlogoutDisplay] = useState("none");
+  const [display , setdisplay] = useState("none")
 
   useEffect(()=>{
     const localtoken = localStorage.getItem('token')
@@ -26,9 +27,17 @@ const SaveFile = () => {
     setAuthData({});
     toast.success("Logout Successfully")
   }
+
+  useEffect(()=>{
+    if(onDisplay=="true"){
+      setdisplay("flex")
+    }else{
+      setdisplay("none")
+    }
+  }, [onDisplay])
   
   return (
-    <div className="sfwrapper">
+    <div style={{display : display}} className="sfwrapper">
       <div className="sfcont">
         <div className="sfnavchat">
           <div className="sfheading">
@@ -43,7 +52,7 @@ const SaveFile = () => {
             <button onClick={handleLogout}>Logout</button>
           </div>
 
-          <button>Close</button>
+          <button onClick={()=>{setdisplay("none")}}>Close</button>
         </div>
         
         <div className="boxarea">

@@ -28,7 +28,7 @@ import ACTIONS from "../../../src/Action"
 
 
 
-const CodeEditor = ({socketRef , roomId , onCodeChange , editorLang ,theme ,ontrackcode}) => {
+const CodeEditor = ({socketRef , roomId , onCodeChange , editorLang ,theme ,ontrackcode , getEditorRef}) => {
     const editorRef = useRef(null);
     useEffect(()=>{
         async function init(){
@@ -43,6 +43,8 @@ const CodeEditor = ({socketRef , roomId , onCodeChange , editorLang ,theme ,ontr
                 }
             );
 
+            getEditorRef(editorRef);
+
             editorRef.current.on('change' , (instance , changes)=>{
                 const { origin } = changes;
                 const code = instance.getValue();
@@ -54,7 +56,6 @@ const CodeEditor = ({socketRef , roomId , onCodeChange , editorLang ,theme ,ontr
                         code,
                     }) 
                 }
-                
             })
         }
         init();

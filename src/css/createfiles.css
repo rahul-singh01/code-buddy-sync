@@ -37,6 +37,12 @@
     border-radius: 8px;
 }
 
+.filesconsole > div{
+    overflow: auto;
+    overflow-x : hidden;
+    height : 450px;
+}
+
 .filesconsole > h4{
     margin-top: 0;
     padding: 5px;
@@ -67,20 +73,110 @@
 .createmenu{
     background-color: rgb(14, 13, 13);
     width : 95%;
-    height : 300px;
+    height : 250px;
     position: absolute;
     bottom: 0;
     border-radius : 10px 0px 0px 10px;
     transition: 2s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
-.createitem{
-    transform: rotate();
+.createmenu{
+    transform:scale(1) 
 }
+
+.createmenu > button{
+    border: 1px solid pink;
+    height : 30px;
+    font-size: 12px;
+}
+
+.folder{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width : 100%;
+    justify-content: space-around;
+}
+
+
 
 .selectboxfile{
-    width: 100px;
-    height: 30px;
-    font-size: 15px;
+    width: 140px;
+    height: 30px important!;
+    font-size: 10px;
 }
 
+.foldertype{
+    display: flex;
+    flex-direction: column;
+    height: min-content;
+    /* position: relative; */
+}
+
+.folderbody{
+    display: flex;
+    flex-direction: row;
+}
+
+.folderbody > textarea{
+    height: 20px;
+    resize: none;
+    padding-left : 10px;
+    padding-top: 5px;
+    cursor: pointer;
+    width : 190px;
+}
+
+
+.folderfiles{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(59, 59, 59);
+    width : 200px;
+    margin-left: 50px;
+    display: none;
+}
+
+.langaugewrapper{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.langcard {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: space-around;
+    background-color: rgb(66, 66, 66);
+    border-radius: 15px;
+    cursor: pointer;
+    height : 30px
+    
+}
+
+.langcard > p{
+    font-size: 12px;
+    font-weight: bold;
+    width: 150px; /* Set your desired width */
+    white-space: nowrap; /* Prevent text from wrapping to the next line */
+    overflow: hidden; /* Hide the overflowing content */
+    text-overflow: ellipsis; 
+}
+
+.langcard > img{
+    width: 25px;
+    height : 25px
+}
+
+
+.filecont{
+    display: flex;
+    margin : 5px;
+    flex-direction: column;
+}
