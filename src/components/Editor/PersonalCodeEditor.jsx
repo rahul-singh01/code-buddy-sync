@@ -28,7 +28,7 @@ import ACTIONS from "../../../src/Action"
 
 
 
-const PersonalCodeEditor = ({editorLang ,theme , getEditorRef2}) => {
+const PersonalCodeEditor = ({editorLang ,theme , getEditorRef2 , onPersonalTerminalCode}) => {
     const editorRef = useRef(null);
     useEffect(()=>{
         async function init(){
@@ -49,6 +49,7 @@ const PersonalCodeEditor = ({editorLang ,theme , getEditorRef2}) => {
             editorRef.current.on('change' , (instance , changes)=>{
                 const { origin } = changes;
                 const code = instance.getValue();
+                onPersonalTerminalCode(code);
 
                 // console.log(code);
 
@@ -72,6 +73,8 @@ const PersonalCodeEditor = ({editorLang ,theme , getEditorRef2}) => {
         };
 
     },[editorLang,theme]);
+
+    
 
     return <textarea className='personalEditor' id="personalEditor"></textarea>
 

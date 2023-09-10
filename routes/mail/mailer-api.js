@@ -14,7 +14,7 @@ const mailer = () => {
                 let sender = "codebuddysync@gmail.com";
                 // let text = `Dear User, the verification code for GeniePlay authentication is ${otp}`;
                 let subject = "Greetings! from CodeBuddySync";
-                var email = "priyanshukr449@gmail.com";
+                var email = "rahul.singh.ug22@nsut.ac.in";
                 const start = new Date();
                 const msg = {
                     from: sender,

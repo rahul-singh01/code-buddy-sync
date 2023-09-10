@@ -1,0 +1,50 @@
+.gptinputwrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: rgb(28, 33, 32); */
+    width : 50%;
+    position: fixed;
+    z-index: 111;
+    border-radius: 10px;
+    margin-left: 20px;
+    margin-top: 100px;
+}
+
+.gptcommandbar{
+    display: flex;
+    width : 80%;
+    justify-content: space-between;
+}
+
+.gptcommandbar > input{
+    width: 80%;
+    height: 25px;
+    border-radius: 8px;
+    padding-left: 10px;
+    margin-left: 10px;
+    border: 1px solid grey;
+    background-color: rgb(39, 38, 38);
+    color : white;
+    
+}
+
+.gptcommandbar > input:hover{
+    opacity: 70%;
+}
+
+.gptcommandbar > span{
+    display: flex;
+    height: 25px;
+    border: 1px solid grey;
+    background-color: rgb(39, 38, 38);
+    color : white;
+    width: 40px;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+.gptcommandbar > span:hover{
+    cursor: pointer;
+    opacity: 50%;
+}

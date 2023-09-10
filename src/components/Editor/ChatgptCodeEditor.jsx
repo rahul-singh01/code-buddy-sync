@@ -22,23 +22,15 @@ import 'codemirror/theme/material.css';
 import 'codemirror/theme/monokai.css';
 import 'codemirror/theme/solarized.css';
 
-
-
 import ACTIONS from "../../../src/Action"
 
-
-
-const CodeEditor = ({socketRef , roomId , onCodeChange , editorLang ,theme ,ontrackcode , getEditorRef , getCodeDB , getfsdisplay}) => {
+const ChatgptCodeEditor = ({editorLang ,theme , getEditorRef3 , gptResponse , getGPTterminalcode}) => {
+    console.log(gptResponse)
     const editorRef = useRef(null);
-
-    const savfile = (code)=>{
-        getfsdisplay(1)
-    }
-
     useEffect(()=>{
         async function init(){
             editorRef.current = Codemirror.fromTextArea(
-                document.getElementById("realtimeEditor"),{
+                document.getElementById("chatGptEditor"),{
                     mode : editorLang,
                     theme : theme,
                     autoCloseTags : true,
@@ -48,27 +40,26 @@ const CodeEditor = ({socketRef , roomId , onCodeChange , editorLang ,theme ,ontr
                 }
             );
 
-            getEditorRef(editorRef);
-
-            editorRef.current.on('keydown' , (cm ,e)=>{
-                if (e.ctrlKey && e.key === 's') {
-                    e.preventDefault(); // Prevent the default browser save dialog
-                    savfile(editorRef.current.getValue()) // Replace this with your actual function
+            getEditorRef3(editorRef);
             
-                }
-            })
-            
+            editorRef.current.getWrapperElement().style.display = "none";
+        
             editorRef.current.on('change' , (instance , changes)=>{
                 const { origin } = changes;
                 const code = instance.getValue();
-                onCodeChange(code);
-                ontrackcode(code);
-                if(origin !== 'setValue'){
-                    socketRef.current.emit(ACTIONS.ACTIONS.CODE_CHANGE ,{
-                        roomId,
-                        code,
-                    }) 
-                }
+                getGPTterminalcode(code);
+
+                // console.log(code);
+
+                // onCodeChange(code);
+                // ontrackcode(code);
+                // if(origin !== 'setValue'){
+                //     socketRef.current.emit(ACTIONS.ACTIONS.CODE_CHANGE ,{
+                //         roomId,
+                //         code,
+                //     }) 
+                // }
+                
             })
         }
         init();
@@ -79,28 +70,16 @@ const CodeEditor = ({socketRef , roomId , onCodeChange , editorLang ,theme ,ontr
             }
         };
 
-    },[editorLang, roomId, socketRef, onCodeChange , theme]);
-
-    useEffect(()=>{editorRef.current.setValue(getCodeDB)},[getCodeDB])
-
+    },[editorLang,theme]);
 
     useEffect(()=>{
+        editorRef.current.setValue(decodeURIComponent(gptResponse));
+        getGPTterminalcode(editorRef.current.getValue());
+    },[gptResponse])
 
-        if(socketRef.current){
-            socketRef.current.on(ACTIONS.ACTIONS.CODE_CHANGE , ({code}) => {
-                if(code !== null){
-                    editorRef.current.setValue(code);
-                }
-            })
-            return ()=>{
-                socketRef.current.off(ACTIONS.ACTIONS.CODE_CHANGE);
-            }
-        }
-    } , [socketRef.current])
-
-    return <textarea id="realtimeEditor"></textarea>
+    return <textarea id="chatGptEditor"></textarea>
 
 }
 
-export default CodeEditor;
+export default ChatgptCodeEditor;
 // export default CodeEditor;

@@ -15,7 +15,7 @@ app.post('/:langauge' , async(req,res)=>{
     console.log("hello")
     const langauge = req.params.langauge;
     try {
-        const {code} = req.body;
+        const {terminalcode} = req.body;
         // const options = {
         //     method: 'POST',
         //     url: 'https://online-code-compiler.p.rapidapi.com/v1/',
@@ -62,7 +62,7 @@ app.post('/:langauge' , async(req,res)=>{
                 'bash'
               ],
               lang: langauge,
-              code,
+              code : terminalcode,
             //   input: ''
             }
         };

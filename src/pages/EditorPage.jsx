@@ -31,6 +31,7 @@ const EditorPage = () => {
 
     const [chatdisplay , setChatDisplay] = useState(false);
     const [myfiledisplay , setmyFileDisplay] = useState("false");
+    const [codeDB , setCodeDB] = useState("")
 
     const run = useRef(false)
 
@@ -141,9 +142,9 @@ const EditorPage = () => {
                 
             </div>
             <div className="editorbox">
-                    <Editor socketRef={socketRef} roomId={roomId} onCodeChange={(code)=>{
-                        codeRef.current = code;
-                    }}/>
+                <Editor getCodeDB={codeDB} socketRef={socketRef} roomId={roomId} onCodeChange={(code)=>{
+                    codeRef.current = code;
+                }}/>
             </div>
             
             <Optionbox chatdisplay={chatdisplay} onReceiveDisplay={(receivedisplay)=>{
@@ -165,7 +166,9 @@ const EditorPage = () => {
                 )
             }
 
-            <SaveFile onDisplay={myfiledisplay}/>
+            <SaveFile onDisplay={myfiledisplay} getCodeDB={(code)=>{
+                setCodeDB(code)
+            }}/>
            
             
         </div>

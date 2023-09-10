@@ -5,11 +5,15 @@ import jwt_decode from 'jwt-decode'
 import { toast } from 'react-hot-toast'
 import CreateFiles from './savefile/CreateFiles'
 
-const SaveFile = ({onDisplay}) => {
+const SaveFile = ({onDisplay , getCodeDB}) => {
   const [authdata , setAuthData] = useState({});
   const localtoken = localStorage.getItem('token')
   const [logoutdisplay , setlogoutDisplay] = useState("none");
   const [display , setdisplay] = useState("none")
+  const [codeDB , setCodeDB] = useState("");
+
+
+  useEffect(()=>{getCodeDB(codeDB)},[codeDB])
 
   useEffect(()=>{
     const localtoken = localStorage.getItem('token')
@@ -58,7 +62,11 @@ const SaveFile = ({onDisplay}) => {
         <div className="boxarea">
           {
             authdata && localtoken ? (
-              <CreateFiles/>
+              <CreateFiles 
+              getCodeFromDB={(code)=>{
+                setCodeDB(code);
+              }}
+              />
             ) : (
               <CreateMember onSavefileSignup={(data)=>{
                 console.log("AuthData : " , data)

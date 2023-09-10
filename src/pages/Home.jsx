@@ -12,7 +12,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   const createRoomID = (e) =>{
-    const id = uuidv4();
+    const id = uuidv4().split("-")[0];
     toast.success("Created Room Successfully !")
     setRoomId(id);
   }

@@ -14,7 +14,7 @@ const port = urlObject.port;
 
 
 
-const LangaugeNav = ({onLangChange , onThemeChange , code , onTerminalOutput}) => {
+const LangaugeNav = ({onLangChange , onThemeChange , code , onTerminalOutput ,gptTerminalcode , workspace , personalTerminalCode}) => {
     // const options = [
     //     { value: 'javascript', codevalue: 'javascript', label: 'JavaScript' , apiLabel : 'nodejs'},
     //     { value: 'cpp', codevalue: 'text/x-csrc' , label: 'C++' , apiLabel : 'cpp'},
@@ -48,6 +48,19 @@ const LangaugeNav = ({onLangChange , onThemeChange , code , onTerminalOutput}) =
     };
 
     const runcode = async() => {
+        console.log(workspace , selectedOption)
+        let terminalcode = ""
+        if(workspace == "chatgpt"){
+            terminalcode = gptTerminalcode
+        }
+        if(workspace == "collaborative"){
+            terminalcode = code
+        }
+        if(workspace == "personal"){
+            terminalcode = personalTerminalCode
+        }
+
+
         const targetElement = document.querySelector('.terminalwrapper');
         targetElement.scrollIntoView({ behavior: 'smooth' });
 
@@ -60,7 +73,7 @@ const LangaugeNav = ({onLangChange , onThemeChange , code , onTerminalOutput}) =
                 'Content-Type' : 'application/x-www-form-urlencoded'
             },
             data : {
-                code
+                terminalcode
             }
         })
         let endTime = new Date();
@@ -69,6 +82,7 @@ const LangaugeNav = ({onLangChange , onThemeChange , code , onTerminalOutput}) =
             output : data.data.output,
             runtime : timeElapsed
         })
+        
     }
 
     const customStyles = {

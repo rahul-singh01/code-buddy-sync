@@ -18,12 +18,16 @@ app.use(cors())
 
 import compilerApi from './routes/compilerApi.js'
 import auth from './routes/Auth.js'
+import chatgpt from './routes/chatgpt.js'
+import fileHandler from './routes/fileHandler.js'
 
 import db from './config/database.js'
 db();
 
 app.use('/compiler/' , compilerApi);
 app.use('/api/v1/' , auth);
+app.use('/api/v1/' , fileHandler);
+app.use('/api/v1/' , chatgpt);
 
 
 import http from 'http'

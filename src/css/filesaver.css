@@ -1,0 +1,111 @@
+.fswrapper{
+    border-radius: 8px;
+    width: 50%;
+    height : 300px;
+    position: absolute;
+    background-color: rgb(64, 62, 62);
+    margin-bottom: 100px;
+    z-index: 111;
+    padding: 5px;
+}
+
+.fsinputwrapper{
+    width: 55%;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    justify-content: left;
+    margin-bottom: 5px;
+}
+.fsinputwrapper > span{
+    margin-left: 20px;
+    margin-right : 5px;
+}
+.fsinputwrapper > input {
+    margin-left: 5px;
+    height : 30px;
+    font-size: 18px;
+    padding-left: 10px;
+}
+
+.langtype{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(69, 69, 105);
+    border-radius: 8px;
+    margin-left: 5px;
+    width : 40px;
+    height: 40px;
+}
+
+.langtype > p{
+    font-size: 18px;
+}
+
+.fsline{
+    border-bottom: 1px solid white;
+}
+
+
+.choosefolder{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+.choosefolder > p{
+    font-size: 15px;
+    color: aliceblue;
+    font-weight: bold;
+    font-family: "Verdana";
+}
+
+.folderlistids{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 180px;
+}
+
+.foldercard{
+    height : 40px;
+    width : 15%;
+    border-radius: 8px;
+    border: 1px solid whitesmoke;
+    background-color: rgb(47, 46, 46);
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin : 5px;
+}
+
+.foldercard:hover{
+    cursor : pointer;
+    opacity: 80%;
+}
+
+.foldercard > p{
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    color: aliceblue;
+    font-size: 13px;
+}
+
+.fsclose{
+    color: red;
+    border: 0.5px solid white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.fsheader{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    align-items: center;
+}
