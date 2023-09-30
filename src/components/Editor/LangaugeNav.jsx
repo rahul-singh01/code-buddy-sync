@@ -14,7 +14,7 @@ const port = urlObject.port;
 
 
 
-const LangaugeNav = ({onLangChange , onThemeChange , code , onTerminalOutput ,gptTerminalcode , workspace , personalTerminalCode}) => {
+const LangaugeNav = ({onLangChange , onThemeChange , code , onTerminalOutput ,gptTerminalcode , workspace , personalTerminalCode, terminalRef}) => {
     // const options = [
     //     { value: 'javascript', codevalue: 'javascript', label: 'JavaScript' , apiLabel : 'nodejs'},
     //     { value: 'cpp', codevalue: 'text/x-csrc' , label: 'C++' , apiLabel : 'cpp'},
@@ -22,10 +22,10 @@ const LangaugeNav = ({onLangChange , onThemeChange , code , onTerminalOutput ,gp
     //     { value: 'python', codevalue: 'python', label: 'Python' , apiLabel: 'python3' }
     // ];
     const options = [
-        { value: 'javascript', codevalue: 'javascript', label: 'JavaScript' , apiLabel : 'nodejs'},
-        { value: 'cpp', codevalue: 'text/x-csrc' , label: 'C++' , apiLabel : 'c_cpp'},
-        { value: 'c', codevalue: 'text/x-csrc', label: 'C'  , apiLabel : 'c'},
-        { value: 'python', codevalue: 'python', label: 'Python' , apiLabel: 'python' }
+        { value: 'javascript', codevalue: 'javascript', label: 'JavaScript' , apiLabel : 'nodejs' ,ext: 'js'},
+        { value: 'cpp', codevalue: 'text/x-csrc' , label: 'C++' , apiLabel : 'c_cpp', ext: 'cpp'},
+        { value: 'c', codevalue: 'text/x-csrc', label: 'C'  , apiLabel : 'c', ext: 'c'},
+        { value: 'python', codevalue: 'python', label: 'Python' , apiLabel: 'python', ext: 'py'}
     ];
     const theme_options = [
         { value: 'dracula', label: 'Dracula' },
@@ -60,28 +60,36 @@ const LangaugeNav = ({onLangChange , onThemeChange , code , onTerminalOutput ,gp
             terminalcode = personalTerminalCode
         }
 
+        console.log(terminalcode)
+
+        terminalRef.current.setCode(terminalcode)
+        terminalRef.current.setExt(selectedOption.ext)
+        terminalRef.current.execute()
+
+        console.log('after terminalref');
+
 
         const targetElement = document.querySelector('.terminalwrapper');
         targetElement.scrollIntoView({ behavior: 'smooth' });
 
-        let startTime = new Date();
-        const data = await axios({
-            method : 'POST',
-            // url : `${protocol}//${hostname}:${"5000"}/compiler/${selectedOption.apiLabel}`,
-            url : `http://localhost:5000/compiler/${selectedOption.apiLabel}`,
-            headers : {
-                'Content-Type' : 'application/x-www-form-urlencoded'
-            },
-            data : {
-                terminalcode
-            }
-        })
-        let endTime = new Date();
-        let timeElapsed = ((endTime - startTime)/1000).toFixed(2);
-        onTerminalOutput({
-            output : data.data.output,
-            runtime : timeElapsed
-        })
+        // let startTime = new Date();
+        // const data = await axios({
+        //     method : 'POST',
+        //     // url : `${protocol}//${hostname}:${"5000"}/compiler/${selectedOption.apiLabel}`,
+        //     url : `http://localhost:5000/compiler/${selectedOption.apiLabel}`,
+        //     headers : {
+        //         'Content-Type' : 'application/x-www-form-urlencoded'
+        //     },
+        //     data : {
+        //         terminalcode
+        //     }
+        // })
+        // let endTime = new Date();
+        // let timeElapsed = ((endTime - startTime)/1000).toFixed(2);
+        // onTerminalOutput({
+        //     output : data.data.output,
+        //     runtime : timeElapsed
+        // })
         
     }
 

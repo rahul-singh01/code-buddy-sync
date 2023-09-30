@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import '../css/editor.css'
 import LangaugeNav from './Editor/LangaugeNav'
 import CodeEditor from './Editor/CodeEditor'
-import Terminal from './Editor/Terminal'
-import { useRef } from 'react';
+// import Terminal from './Editor/Terminal'
 import PersonalCodeEditor from './Editor/PersonalCodeEditor'
 import ChatgptCodeEditor from './Editor/ChatgptCodeEditor'
 import ChatGptInput from './chatgpt/ChatGptInput'
 import FileSaver from './Editor/FileSaver'
+
+import Terminal from '../../terminal-api/client/src/Component/Terminal/Terminal'
 
 
 const Editor = ({socketRef , roomId , onCodeChange , getCodeDB}) => {
@@ -30,6 +31,7 @@ const Editor = ({socketRef , roomId , onCodeChange , getCodeDB}) => {
 
   const [msgspace , setMsgSpace] = useState("You are in Collaborative Workspace Your Code Changes will appear to joined cients");
 
+  const terminalRef = useRef(null)
 
 
   let previousElement = null;
@@ -89,11 +91,14 @@ const Editor = ({socketRef , roomId , onCodeChange , getCodeDB}) => {
   return (
     <div className="editorwrapper" ref={editowrapperRef}>
 
-      <LangaugeNav onLangChange={(language)=>{
-        setLang(language.codevalue);
-      }} onThemeChange={(theme)=>{
-        settheme(theme.value);
-      }} code={code}
+      <LangaugeNav terminalRef={terminalRef} 
+        onLangChange={(language)=>{
+          setLang(language.codevalue);
+        }}
+        onThemeChange={(theme)=>{
+          settheme(theme.value);
+        }} 
+        code={code}
         onTerminalOutput={(terminal_output)=>{
           setOutput(terminal_output);
         }}
@@ -119,7 +124,7 @@ const Editor = ({socketRef , roomId , onCodeChange , getCodeDB}) => {
       </div>
 
       
-      <FileSaver fsdisplay={fsdisplay} language={lang} workspace={workspace} collabcode={code} terminalGPTcode={terminalGPTcode} personalTerminalCode={personalTerminalCode}/>
+      {/* <FileSaver fsdisplay={fsdisplay} language={lang} workspace={workspace} collabcode={code} terminalGPTcode={terminalGPTcode} personalTerminalCode={personalTerminalCode}/> */}
       
 
       <CodeEditor getCodeDB={getCodeDB} socketRef={socketRef} roomId={roomId} onCodeChange={onCodeChange} editorLang={lang} theme={theme} ontrackcode={(trackcode)=>{
@@ -166,7 +171,9 @@ const Editor = ({socketRef , roomId , onCodeChange , getCodeDB}) => {
 
 
       
-      <Terminal output={output}/>
+      {/* <Terminal output={output}/> */}
+      <Terminal ref={terminalRef} name={'name'}/>
+
     </div>
   )
 }
