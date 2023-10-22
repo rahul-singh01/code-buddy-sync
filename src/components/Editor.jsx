@@ -169,9 +169,6 @@ const Editor = ({socketRef , roomId , onCodeChange , getCodeDB}) => {
       }}
       />
 
-
-      
-      {/* <Terminal output={output}/> */}
       <Terminal ref={terminalRef} name={'name'}/>
 
     </div>
