@@ -112,6 +112,13 @@ io.on('connection', (socket)=>{
 
 })
 
+
+app.use(express.static(path.join(__dirname, 'dist'), { index: false }));
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+
+
 const port = process.env.PORT || 5000;
 server.listen(port , ()=>{
     console.log('listening on port : ' , `http://localhost:${port}`);

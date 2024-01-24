@@ -7,6 +7,7 @@ const app = express.Router()
 
 
 app.post('/signup' , async(req ,res)=>{
+    console.log("jgdasjd8eq")
     const {credentials} = req.body
     const credential = jwt_decode(credentials)
 

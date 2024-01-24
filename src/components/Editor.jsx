@@ -8,7 +8,7 @@ import ChatgptCodeEditor from './Editor/ChatgptCodeEditor'
 import ChatGptInput from './chatgpt/ChatGptInput'
 import FileSaver from './Editor/FileSaver'
 
-import Terminal from '../../terminal-api/client/src/Component/Terminal/Terminal'
+import Terminal from '../../Terminal-API/client/src/Component/Terminal/Terminal.jsx'
 
 
 const Editor = ({socketRef , roomId , onCodeChange , getCodeDB}) => {
